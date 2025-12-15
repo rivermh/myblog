@@ -34,7 +34,7 @@ import jakarta.servlet.http.HttpSession;
 // 인증이 안된 사용자들이 출입할 수 있는 경로를 /auth/** 허용
 // 그냥 주소가 / 이면 index.jsp 허용
 // staic 이하에 있는 /js/**, /css/**, /image/**
-
+// 카카오가 준 code를 받는다 > code로 카카오 사용자 정보를 가져온다 > 그 사용자로 사이트에 로그인시킨다
 @Controller
 public class UserController {
  
@@ -135,7 +135,7 @@ public class UserController {
                 .password(minhoKey)
                 .email(kakaoProfile.getKakao_account().getEmail())
                 .oauth("kakao")
-                .build();
+                .build(); // username 충돌 방지, password는 실제 로그인용 아님 oauth 필드로 일반 로그인과 구분
 
         // 가입자 혹은 비가입자 체크 해서 처리
         User originUser = userService.회원찾기(kakaoUser.getUsername());
@@ -149,8 +149,10 @@ public class UserController {
         originUser = userService.회원찾기(kakaoUser.getUsername());
 
         System.out.println("자동 로그인을 진행합니다.");
-
-        // *** 여기 핵심: username + password 로 authenticate ***
+        
+        /* 여기 핵심
+        1. AuthenticationManage 2. PrincipalDetatilService.loadUserByUsernname 3. DB 조회
+        4. PassworrdEncoder 비교 5. 인증성공 */
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         originUser.getUsername(),
