@@ -14,6 +14,7 @@ import com.my.blog.model.User;
 import com.my.blog.service.UserService;
 
 @RestController
+// 회원가입 회원수정 요청을 받아서 Service에 넘기고 JSON으로 결과만 돌려주는 역할
 public class UserApiController {
 
 	@Autowired
