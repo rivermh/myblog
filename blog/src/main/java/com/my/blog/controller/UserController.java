@@ -37,7 +37,7 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
-
+ 
     @Value("${minho.key}")
     private String minhoKey;
     
