@@ -11,8 +11,6 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration 
 public class SecurityConfig{ // 2. extends 제거
-
-	// 3. principalDetailService 제거
  
 	// 4. AuthenticationManager 메서드 생성
 	@Bean
@@ -24,9 +22,6 @@ public class SecurityConfig{ // 2. extends 제거
 	public BCryptPasswordEncoder encodePWD() {
 		return new BCryptPasswordEncoder();
 	}
-	
-	// 5. 기본 패스워드 체크가 BCryptPasswordEncoder 여서 설정 필요 없음.
-
 
 	// 6. 최신 버전(2.7)으로 시큐리티 필터 변경
 	@Bean
@@ -40,14 +35,12 @@ public class SecurityConfig{ // 2. extends 제거
 			            .requestMatchers("/", "/auth/**", "/js/**", "/css/**", "/image/**", "/dummy/**", "/WEB-INF/**").permitAll()
 			            .anyRequest().authenticated()
 			);
-
-		
+	
 		// 3. 로그인 처리 프로세스 설정
 		http.formLogin(f -> f.loginPage("/auth/loginForm")
 				.loginProcessingUrl("/auth/loginProc")
 				.defaultSuccessUrl("/")
 		);
-
 		return http.build();
 	}
 }
