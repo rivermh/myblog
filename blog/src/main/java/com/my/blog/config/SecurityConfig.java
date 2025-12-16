@@ -18,7 +18,7 @@ public class SecurityConfig{ // 2. extends 제거
 		return authenticationConfiguration.getAuthenticationManager();
 	}
 
-	@Bean // IoC가 되요!!
+	@Bean // IoC가 된다!!
 	public BCryptPasswordEncoder encodePWD() {
 		return new BCryptPasswordEncoder();
 	}
