@@ -84,7 +84,7 @@ public class UserController {
                 HttpMethod.POST,
                 kakaoTokenRequest,
                 String.class
-        ); // JSOT 코드
+        ); // JSON 코드
 
         ObjectMapper objectMapper = new ObjectMapper();
         OAuthToken oauthToken = null;
