@@ -39,7 +39,6 @@ public class UserService {
 		} catch (Exception e) {
 			return -1;
 		}
-		
 	}
 
 	@Transactional
